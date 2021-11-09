@@ -1,0 +1,64 @@
+---
+title: "Rcapstone"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Rcapstone}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This package contains functions to clean and visualise earthquake data.
+
+## Load Library
+```{r, message=FALSE}
+library(readr)
+library(dplyr)
+library(stringr)
+library(lubridate)
+library(ggplot2)
+library(leaflet)
+library(Rcapstone)
+```
+
+## Import Dataset
+The raw dataset is obtained from National Geophysical Data Center / World Data Service (NGDC/WDS): Significant Earthquake Database. National Geophysical Data Center, NOAA. Click here [doi:10.7289/V5TD9V7K](http://dx.doi.org/10.7289/V5TD9V7K)
+
+For convenience, the data has been preloaded into `./inst/extdata/dataset.txt`.
+
+```{r, message=FALSE}
+raw_data <- system.file("extdata", "dataset.txt", 
+                        package = "Rcapstone")
+```
+
+## Clean Data
+This create a cleaned data for earthquakes since 01 Jan 1900, excluding data points with missing magnitude or intensity.
+```{r, message=FALSE}
+cleaned_data <- eq_clean_data(raw_data)
+cleaned_data <- eq_location_clean(cleaned_data)
+head(cleaned_data, 5)
+```
+
+## Create Timeline Plot
+```{r, fig.height=4, fig.width=5}
+ggplot(data = cleaned_data, 
+       aes(x = DATE, country = COUNTRY, label = LOCATION, magnitude = MAGNITUDE)) +
+  geom_timeline(ctry = "MEXICO", xmin = dmy("01/01/2000"), xmax = dmy("01/01/2018")) +
+  geom_timeline_label(n_max = 2, ctry = "MEXICO", 
+                      xmin = dmy("01/01/2000"), xmax = dmy("01/01/2018")) +
+  theme_classic()
+```
+
+## Create Map Plot
+```{r, fig.height=4, fig.width=5}
+cleaned_data %>% 
+  filter(COUNTRY == "MEXICO" & year(DATE) >= 2000) %>% 
+  mutate(popup_text = eq_create_label(.)) %>% 
+  eq_map(annot_col = "popup_text")
+```

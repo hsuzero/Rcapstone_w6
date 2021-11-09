@@ -19,10 +19,10 @@ This function plots a straightforward map using circles to determine the eartqua
 of the circle is according to the magnitude (in Richter Scale) of the earthquake.
 }
 \examples{
-\dontrun{readr::read_delim("./inst/extdata/dataset.txt", delim = "\t") \%>\% 
-  eq_clean_data() \%>\% 
+\dontrun{readr::read_delim("./inst/extdata/dataset.txt", delim = "\t") \%>\%
+  eq_clean_data() \%>\%
   eq_location_clean() \%>\%
-  filter(COUNTRY == "MEXICO" & lubridate::year(DATE) >= 2000) \%>\% 
-  mutate(popup_text = eq_create_label(.)) \%>\% 
+  filter(COUNTRY == "MEXICO" & lubridate::year(DATE) >= 2000) \%>\%
+  mutate(popup_text = eq_create_label(.)) \%>\%
   eq_map(annot_col = "popup_text")}
 }
