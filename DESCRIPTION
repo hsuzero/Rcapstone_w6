@@ -1,0 +1,17 @@
+Package: Rcapstone
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Author: JL Hsu
+Maintainer: JL Hsu <hsuzero@gamil.com>
+Description: This package is a asignment to Coursera course.
+License: GPL (<=3)
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+RoxygenNote: 7.1.2
+Config/testthat/edition: 3
