@@ -28,7 +28,7 @@ library(Rcapstone)
 ```
 
 ## Import Dataset
-The raw dataset is obtained from National Geophysical Data Center / World Data Service (NGDC/WDS): Significant Earthquake Database. National Geophysical Data Center, NOAA. Click here [doi:10.7289/V5TD9V7K](http://dx.doi.org/10.7289/V5TD9V7K)
+The raw dataset is obtained from National Geophysical Data Center / World Data Service (NGDC/WDS): Significant Earthquake Database. National Geophysical Data Center, NOAA.
 
 For convenience, the data has been preloaded into `./inst/extdata/dataset.txt`.
 
@@ -58,7 +58,7 @@ ggplot(data = cleaned_data,
 ## Create Map Plot
 ```{r, fig.height=4, fig.width=5}
 cleaned_data %>% 
-  filter(COUNTRY == "MEXICO" & year(DATE) >= 2000) %>% 
-  mutate(popup_text = eq_create_label(.)) %>% 
-  eq_map(annot_col = "popup_text")
+  filter(COUNTRY == "MEXICO" & year(DATE) >= 2000)  
+  #mutate(popup_text = eq_create_label(.)) %>% 
+  #eq_map(annot_col = "popup_text")
 ```

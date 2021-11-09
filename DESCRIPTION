@@ -13,5 +13,11 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
+Imports: dplyr,
+    ggplot2,
+    leaflet,
+    lubridate,
+    readr,
+    stringr
 RoxygenNote: 7.1.2
 Config/testthat/edition: 3
