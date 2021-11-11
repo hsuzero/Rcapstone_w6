@@ -1,4 +1,4 @@
-
+[![Build Status](https://app.travis-ci.com/hsuzero/Rcapstone_w6.svg?branch=main)](https://app.travis-ci.com/hsuzero/Rcapstone_w6)
 
 ## Introduction
 
